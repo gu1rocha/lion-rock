@@ -4,7 +4,7 @@ document.querySelector('nav').innerHTML = `
         <button id="menu-btn">
             <span class="material-symbols-sharp">menu</span>
         </button>
-        <a class="logo" href="/lion&rock/">
+        <a class="logo" href="/lion-rock/">
             ${pathname == "home" 
             ? '<img src="./assets/img/Logotipo lion&rock.svg">' 
             : '<img src="./../assets/img/Logotipo lion&rock.svg">'}
