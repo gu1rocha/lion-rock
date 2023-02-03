@@ -2,7 +2,7 @@ let showMessageBox = ()=> {
 
     let BoxMessage = {
         showMessage: function(objeto){
-            GetHTML('/lion&rock/messageBox/index.html', 'get',  function(obj) {
+            GetHTML('/lion-rock/messageBox/index.html', 'get',  function(obj) {
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(obj.responseText, "text/html");
                 document.querySelector('body').classList.value === 'noScrool' 
