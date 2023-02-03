@@ -103,13 +103,23 @@ nav .container .nome {
     }
 }
 
-@media screen and (min-width: 1350px){
+/* @media screen and (min-width: 1350px){
     .inventory, nav .container .left .logo{
         display: none;
     }
+} */
+nav .container .left #menu-btn{
+    display: block;
 }
 
-@media screen and (max-width: 1540px){
+nav .container .left {
+    display: inline-flex;
+    width: 50vw;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* @media screen and (max-width: 1540px){
     nav .container .left #menu-btn{
         display: block;
     }
@@ -119,4 +129,4 @@ nav .container .nome {
         align-items: center;
         justify-content: space-between;
     }
-}
+} */

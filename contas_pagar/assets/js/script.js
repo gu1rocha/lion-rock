@@ -27,9 +27,9 @@ let Listar_compras = ()=>{
                                             <a>${compra.ocorrencia == 0 ? 'Unica' : compra.n_parcela+' / '+compra.qtd_parcelas}</a>
                                             <a>${(compra.valor_total).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</a>
                                             <a>
-                                                ${!compra.situacao_pagamento ? `<span class="material-symbols-sharp pagar" onclick="Show_box_pagamento(${compra.id})">payments</span>` : ''}
-                                                <span class="material-symbols-sharp editar" onclick="Editar_compra(${compra.id})">edit_square</span>
-                                                <span class="material-symbols-sharp deletar" onclick="Deletar_compra(${compra.id})">delete</span>
+                                                ${!compra.situacao_pagamento ? `<span class="material-symbols-sharp pagar" onclick="Show_box_pagamento(${compra.id})" data-texto="Pagar">payments</span>` : ''}
+                                                <span class="material-symbols-sharp editar" onclick="Editar_compra(${compra.id})" data-texto="Editar">edit_square</span>
+                                                <span class="material-symbols-sharp deletar" onclick="Deletar_compra(${compra.id})" data-texto="Excluir">delete</span>
                                             </a>
                                         </div>
                                     `

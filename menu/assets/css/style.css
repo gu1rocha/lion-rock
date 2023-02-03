@@ -100,42 +100,39 @@ aside .sidebar .message-count{
     border-radius: var(--border-radius-1)
 }
 
-@media screen and (min-width: 1541px){
+/* @media screen and (min-width: 1541px){
     aside{
         display: none;
         position: sticky;
         top: 6rem;
     }
+} */
+
+aside{
+    position: fixed;
+    left: -100%;
+    background-color: var(--color-white);
+    width: 18rem;
+    z-index: 3;
+    height: 100vh;
+    padding-right: var(--card-padding);
+    display: none;
+    animation: showMenuAside 400ms ease forwards;
+    overflow: hidden auto;
+    top: 0;
 }
 
-@media screen and (max-width: 1540px){
-
-    aside{
-        position: fixed;
-        left: -100%;
-        background-color: var(--color-white);
-        width: 18rem;
-        z-index: 3;
-        height: 100vh;
-        padding-right: var(--card-padding);
-        display: none;
-        animation: showMenuAside 400ms ease forwards;
-        overflow: hidden auto;
-        top: 0;
+@keyframes showMenuAside {
+    to{
+        left: 0;
     }
+}
 
-    @keyframes showMenuAside {
-        to{
-            left: 0;
-        }
-    }
+aside .top{
+    margin-top: 1.5rem;
+}
 
-    aside .top{
-        margin-top: 1.5rem;
-    }
-
-    aside .close {
-        display: inline-block;
-        cursor: pointer;
-    }
+aside .close {
+    display: inline-block;
+    cursor: pointer;
 }
