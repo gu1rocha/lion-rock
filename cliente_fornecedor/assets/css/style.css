@@ -81,7 +81,7 @@
     border: solid 1px gainsboro;
     padding: 1rem;
     border-radius: 0.5rem;
-    max-height: calc(100vh - 2rem);
+    max-height: calc(calc(var(--vh, 1vh) * 100) - 2rem);
     overflow: auto;
 }
 
