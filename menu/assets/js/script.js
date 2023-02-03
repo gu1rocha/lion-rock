@@ -1,5 +1,5 @@
 let showMenuLateral = ()=> {
-    GetHTML('/lion&rock/menu/index.html', 'get',  function(obj) {
+    GetHTML('/lion-rock/menu/index.html', 'get',  function(obj) {
         const parser = new DOMParser();
         const doc = parser.parseFromString(obj.responseText, "text/html");
 
