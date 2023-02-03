@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="./../assets/css/inicialize.css">
+
+    <title>Lion&Rock - Agenda</title>
+
+    <script src="./../assets/js/uteis.js"></script>
+
+    <link rel="stylesheet" href="./../nav/nav.css">
+    <script src="./../nav/nav.js" defer></script>
+
+    <link rel="stylesheet" href="./../menu/assets/css/style.css">
+    <script src="./../menu/assets/js/script.js" defer></script>
+
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <script src="./assets/js/script.js" defer="defer"></script>
+</head>
+<body>
+    <nav></nav>
+    <main>
+        <h1 class="titulo">Agenda</h1>
+        <div class="box_calendario">
+            <div class="calendario">
+                <div class="mes">
+                    <span class="material-symbols-sharp prev">arrow_back_ios</span>
+                    <div class="data">
+                        <h1></h1>
+                        <p></p>
+                    </div>
+                    <span class="material-symbols-sharp next">arrow_forward_ios</span>
+                </div>
+                <div class="dias_semana">
+                    <div>Dom</div>
+                    <div>Seg</div>
+                    <div>Ter</div>
+                    <div>Qua</div>
+                    <div>Qui</div>
+                    <div>Sex</div>
+                    <div>Sab</div>
+                </div>
+                <div class="dias"></div>
+                <div class="legenda">
+                    <div>
+                        <div><span class="receber"></span>Contas a receber</div>
+                        <div><span class="pagar"></span>Contas a pagar</div>
+                        <div><span class="compromisso"></span>Compromisso</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box_tarefas">
+            <div class="tarefas contas_pagar hidden">
+                <h1>Contas a pagar</h1>
+                <div class="table">
+                    <div class="head_table">
+                        <a>DIA</a>
+                        <a>FORNECEDOR</a>
+                        <a>VALOR</a>
+                        <a>SITUAÇÃO</a>
+                    </div>
+                    <div class="body_table"></div>
+                    <div class="table_total"></div>
+                </div>
+            </div>
+            <div class="tarefas contas_receber  hidden">
+                <h1>Contas a receber</h1><div class="table">
+                    <div class="head_table">
+                        <a>DIA</a>
+                        <a>FORNECEDOR</a>
+                        <a>VALOR</a>
+                        <a>SITUAÇÃO</a>
+                    </div>
+                    <div class="body_table"></div>
+                    <div class="table_total"></div>
+            </div>
+            <div class="tarefas compromissos hidden">
+                <h1>Compromissos</h1>
+                <div></div>
+            </div>
+        </div>
+    </main>
+    <div class="back_box_eventos hidden">
+        <div class="box_eventos">
+            <div class="top">
+                <h1>Agenda</h1>
+                <span class="material-symbols-sharp close">close</span>
+            </div>
+            <div class="tarefas contas_pagar hidden">
+                <h1>Contas a pagar</h1>
+                <div class="table">
+                    <div class="head_table">
+                        <a>DIA</a>
+                        <a>FORNECEDOR</a>
+                        <a>VALOR</a>
+                        <a>SITUAÇÃO</a>
+                    </div>
+                    <div class="body_table"></div>
+                    <div class="table_total"></div>
+                </div>
+            </div>
+            <div class="tarefas contas_receber hidden">
+                <h1>Contas a receber</h1><div class="table">
+                    <div class="head_table">
+                        <a>DIA</a>
+                        <a>FORNECEDOR</a>
+                        <a>VALOR</a>
+                        <a>SITUAÇÃO</a>
+                    </div>
+                    <div class="body_table"></div>
+                    <div class="table_total"></div>
+            </div>
+            <div class="tarefas compromissos hidden">
+                <h1>Compromissos</h1>
+                <div></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

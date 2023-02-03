@@ -1,0 +1,236 @@
+.box_calendario{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box_calendario .calendario{
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-white);
+    border-radius: 0.5rem;
+    box-shadow: 0rem 0rem 1rem var(--color-dark-variant);
+    overflow: auto;
+    color: var(--color-dark);
+    font-weight: bold;
+}
+
+.box_calendario .calendario .mes{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 7rem;
+    background-color: var(--color-primary-light);
+    text-align: center;
+}
+
+.box_calendario .calendario .mes span{
+    font-size: 2.5rem;
+    cursor: pointer;
+}
+
+.box_calendario .calendario .mes .data{
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.box_calendario .calendario .mes .data p{
+  cursor: pointer;
+}
+
+.box_calendario .calendario .mes h1{
+    letter-spacing: .2rem;
+}
+
+.box_calendario .calendario .dias_semana{
+    width: 100%;
+    display: grid;
+    align-items: center;
+    height: 4rem;
+    text-align: center;
+    gap: .5rem;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.box_calendario .calendario .dias{
+    width: 100%;
+    display: grid;
+    align-items: center;
+    text-align: center;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.2rem;
+    padding: 0.2rem;
+}
+
+.box_calendario .calendario .dias > div{
+  height: 4rem;
+  padding: 0.2rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  transition: all 300ms ease;
+  border: solid 1px #eee;
+  border-radius: 3px;
+}
+
+.box_calendario .calendario .dias .prev_dia, .box_calendario .calendario .dias .next_dia{
+  opacity: .5;
+}
+
+.box_calendario .calendario .dias > div:not(.prev_dia, .next_dia):hover{
+  background-color: #d1d1d1;
+  border: .05rem solid white;
+  cursor: pointer;
+}
+
+.box_calendario .calendario .dias div div{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.box_calendario .calendario .dias .hoje{
+  background-color: var(--color-primary-light);
+}
+
+
+.box_calendario .calendario .dias div div span{
+  display: inline-block;
+  width: .8rem;
+  height: .8rem;
+  border-radius: 50%;
+}
+
+span.receber{
+  background-color: var(--color-success);
+}
+
+span.pagar{
+  background-color: var(--color-danger);
+}
+
+span.compromisso {
+  background-color: var(--color-warning);
+}
+
+.legenda{
+  padding: 1rem .5rem;
+  border: 1px solid #eee;
+  width: 95%;
+  margin: 1rem auto;
+  border-radius: 0.5rem;
+}
+
+.legenda > div{
+  display: flex;
+  justify-content: space-around;
+}
+
+.legenda > div div{
+  display: flex;
+  align-items: center;
+  gap: .25rem;
+  letter-spacing: -1px;
+}
+
+.legenda div span{
+  display: inline-block;
+  width: .8rem;
+  height: .8rem;
+  border-radius: 50%;
+}
+
+.box_tarefas{
+  margin-top: 1rem;
+}
+
+.tarefas{
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.tarefas h1{
+  color: var(--color-primary-light);
+  border-bottom: dashed 1px var(--color-primary-dark);
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+}
+
+
+.tarefas .table {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+  background: var(--color-white);
+  padding: var(--card-padding);
+  text-align: center;
+  box-shadow: var(--box-shadow);
+  transition: all 300ms ease;
+  border: 1px solid var(--color-light);
+  overflow: auto;
+}
+
+.tarefas .table .head_table {
+  display: grid;
+  grid-template-columns: 10% 60% 15% 15%;
+  font-weight: bold;
+  white-space: nowrap;
+  text-align: center;
+  min-width: 400px;
+}
+
+.tarefas .table .body_table div{
+  display: grid;
+  grid-template-columns: 10% 60% 15% 15%;
+  align-items: center;
+  height: 3.7rem;
+  min-width: 400px;
+  border-bottom: 1px solid var(--color-light);
+  color: var(--color-dark-variant);
+}
+
+.tarefas .table .table_total{
+  text-align: end;
+  padding: 1rem 0;
+  min-width: 400px;
+}
+
+.back_box_eventos{
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  z-index: 1;
+  background-color: rgba(255, 255, 255, .8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back_box_eventos .box_eventos{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  max-width: 600px;
+  width: 90vw;
+  background-color: var(--color-white);
+  border: solid 1px gainsboro;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  color: var(--color-dark);
+}
+
+.back_box_eventos .box_eventos .top{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0 .5rem 0;
+}
+
+.back_box_eventos .box_eventos .top .close{
+    font-weight: bold;
+    cursor: pointer;
+}

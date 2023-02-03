@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-Br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./../assets/css/inicialize.css">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+    <title>Lion&Rock - Cliente/Fornecedor</title>
+
+    <script src="./../assets/js/uteis.js"></script>
+
+    <link rel="stylesheet" href="./../messageBox/assets/css/style.css">
+    <script src="./../messageBox/assets/js/script.js"></script>
+
+    <link rel="stylesheet" href="./../nav/nav.css">
+    <script src="./../nav/nav.js" defer></script>
+
+    <link rel="stylesheet" href="./../menu/assets/css/style.css">
+    <script src="./../menu/assets/js/script.js" defer></script>
+    
+    <link rel="stylesheet" href="./../assets/css/table.css">
+
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <script src="./assets/js/script.js" defer="defer"></script>
+</head>
+<body>
+    <nav></nav>
+    <main>
+        <h1 class="titulo">Clientes e Fornecedores</h1>
+        <div class="box_btn">
+          <button>Adicionar</button>
+        </div>
+        <div class="vazio hidden">
+            <h1>Nenhum Cliente ou Fornecedor encontrado</h1>
+            <button>Adicionar novo</button>
+        </div>
+        <div class="table hidden">
+            <div class="head_table">
+                <a>Situação</a>
+                <a>Tipo</a>
+                <a>Nome</a>
+                <a>Ações</a>
+            </div>
+            <div class="body_table"></div>
+        </div>
+    </main>
+    <div class="back_box_fornecedor_cliente hidden">
+        <form class="box_fornecedor_cliente">
+            <div class="top">
+                <h1>Dados do Fornecedor/Cliente</h1>
+                <span class="material-symbols-sharp close">close</span>
+            </div>
+            <div class="box_inputs">
+                <div class="box_input">Situação cadastro
+                    <label class="switch" for="situacao_cadastro">
+                        <input type="checkbox" id="situacao_cadastro" name="situacao_cadastro">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="box_input">
+                    <label for="tipo_cadastro">Tipo de cadastro</label>
+                    <select id="tipo_cadastro" style="width: 9.5rem;" name="tipo_cadastro">
+                      <option value="0">Ambos</option>
+                      <option value="1">Fornecedor</option>
+                      <option value="2">Cliente</option>
+                    </select>
+                </div>
+                <div class="box_input" style="width: calc(100% - 1rem);">
+                    <label for="nome" class="required">Fornecedor/Cliente</label>
+                    <input type="text" id="nome" name="nome" required>
+                </div>
+                <div class="box_input">
+                    <label for="cpf_cnpj">CPF/CNPJ</label>
+                    <input type="text" id="cpf_cnpj" name="cpf_cnpj" onkeyup="handle_cpf_cnpj(event)" maxlength="18" autocomplete="off">
+                </div>
+                <div class="box_input">
+                    <label for="telefone">Telefone</label>
+                    <input type="tel" id="telefone" name="telefone" onkeyup="handlePhone(event)" maxlength="15" autocomplete="off">
+                </div>
+                <div class="box_input" style="width: calc(100% - 1rem);">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" maxlength="255" autocomplete="off">
+                </div>
+                <div class="box_input" style="width: calc(100% - 1rem);">
+                    <label for="obs_fornecedor_cliente">OBSERVAÇÕES</label>
+                    <textarea id="obs_fornecedor_cliente" name="obs_fornecedor_cliente"></textarea>
+                </div>
+            </div>
+            <div class="bottom">
+                <button class="cancelar">Cancelar</button>
+                <button class="adicionar" type="submit">Adicionar</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

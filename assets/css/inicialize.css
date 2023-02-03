@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Outfit:wght@100&family=Pacifico&family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+:root{
+    --color-primary: #d42940;
+    --color-danger: #ff7782;
+    --color-success: #41f1b6;
+    --color-warning: #ffbb55;
+    --color-info: #17a2b8;
+    --color-white: #fff;
+    --color-info-dark: #7d8da1;
+    --color-info-light: #dce1eb;
+    --color-dark: #363949;
+    --color-light: rgba(132, 139, 200, 0.18);
+    --color-primary-dark: #980c25;
+    --color-primary-light: #ff3e52;
+    --color-dark-variant: #677483;
+    --color-background: #f6f6f9;
+
+    --card-border-radius: 2rem;
+    --border-radius-1: 0.4rem;
+    --border-radius-2: 0.8rem;
+    --border-radius-3: 1.2rem;
+
+    --card-padding: 1.4rem;
+    --padding-1: 1rem;
+    --padding-2: 0.4rem;
+
+    --box-shadow: 0 .5rem .5rem var(--color-light);
+
+    --invert: 0;
+}
+
+.dark-theme-variables{
+    --color-background: #181a1e;
+    --color-white: #202528;
+    --color-dark: #edeffd;
+    --color-dark-variant: #a3bdcc;
+    --color-light: rgba(0, 0, 0, 0.4);
+    --box-shadow: .5rem .5rem .5rem var(--color-light);
+    --invert: 1;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    appearance: none;
+    border: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 14px;
+    scroll-behavior: smooth;
+}
+
+body{
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    font-family: poppins, sans-serif;
+    font-size: 0.88rem;
+    background: var(--color-background);
+    user-select: none;
+    overflow-x: hidden;
+    color: var(--color-dark);
+    position: relative;
+}
+
+a{
+    color: var(--color-dark);
+}
+
+img{
+    display: block;
+    width: 100%;
+}
+
+h1{
+    font-weight: 800;
+    font-size: 1.6rem;
+}
+
+h2{
+    font-size: 1.4rem;
+}
+
+h3{
+    font-size: 0.87rem;
+}
+
+h4{
+    font-size: 0.8rem;
+}
+
+h5{
+    font-size: 0.77rem;
+}
+
+small{
+    font-size: 0.75rem;
+}
+
+.error{
+    background-color: var(--color-danger) !important;
+    box-shadow: inset 5rem 5rem var(--color-danger) !important;
+}
+
+.hidden{
+    display: none !important;
+}
+
+.noScrool{
+    overflow: hidden;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    height: 1em;
+    width: 1em;
+    border-radius: 50em;
+    background: url(https://pro.fontawesome.com/releases/v5.10.0/svgs/solid/times-circle.svg) no-repeat 50% 50%;
+    background-size: contain;
+    opacity: 0;
+    pointer-events: none;
+    cursor: pointer;
+
+    filter: invert(var(--invert));
+}
+
+input[type="search"]:focus::-webkit-search-cancel-button {
+    opacity: 1;
+    pointer-events: all;
+}
+
+main{
+    width: 95%;
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: var(--color-white);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0rem 0rem 1rem var(--color-dark-variant);
+}
+
+main h1.titulo{
+    color: var(--color-primary-light);
+    border-bottom: solid 1px var(--color-primary-dark);
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+}
+
+select {
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    outline: none;
+    width: auto;
+    padding: .5rem;
+    transition: all .1s linear;
+    appearance: auto;
+    color: #000;
+}
+
+.required{
+    position: relative;
+}
+
+.required:after {
+    position: absolute;
+    top: 5%;
+    content:" *"; 
+    color: red;
+}

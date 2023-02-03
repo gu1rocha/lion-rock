@@ -1,0 +1,284 @@
+:root{
+    --col: 6;
+}
+
+.box_btn {
+    width: 100%;
+    margin: 2rem auto 2rem;
+}
+
+.box_btn button {
+    padding: .5rem 1rem;
+    border-radius: var(--border-radius-1);
+    box-shadow: var(--box-shadow);
+    font-weight: bold;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+.box_btn button:hover {
+    cursor: pointer;
+    box-shadow: none;
+}
+
+.vazio{
+    height: 15rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed;
+    box-shadow: var(--box-shadow);
+    padding: 0 1rem;
+    flex-direction: column;
+}
+
+.vazio h1{
+    text-align: center;
+}
+
+.vazio button {
+    padding: .5rem 1rem;
+    border-radius: var(--border-radius-1);
+    box-shadow: var(--box-shadow);
+    font-weight: bold;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    margin-top: 2rem;
+}
+
+.vazio button:hover {
+    cursor: pointer;
+    box-shadow: none;
+}
+
+.table{
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+    background: var(--color-white);
+    border-radius: var(--card-border-radius);
+    padding: var(--card-padding);
+    text-align: center;
+    box-shadow: var(--box-shadow);
+    transition: all 300ms ease;
+    border: 1px solid var(--color-light);
+    overflow: auto;
+    text-align: center;
+}
+
+.table:hover{
+    box-shadow: none;
+}
+
+.table .head_table{
+    display: grid;
+    grid-template-columns: repeat(var(--col), calc(100%/var(--col)));
+    font-weight: bold;
+    white-space: nowrap;
+    text-align: center;
+    min-width: 700px;
+}
+
+.table .body_table div{
+    display: grid;
+    grid-template-columns: repeat(var(--col), calc(100%/var(--col)));
+    align-items: center;
+    height: 3.7rem;
+    min-width: 700px;
+    border-bottom: 1px solid var(--color-light);
+    color: var(--color-dark-variant);
+}
+
+.table .body_table div a{
+    text-align: center;
+}
+
+.table .body_table div:last-child{
+    border: none;
+}
+
+.table .body_table div a:last-child span{
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: .25rem;
+    font-size: 1.5rem;
+    color: white;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0.2rem 0.2rem 0.2rem grey;
+    transition: all ease 300ms;
+}
+
+.table .body_table div a:last-child span:hover{
+    box-shadow: none;
+}
+
+.table .body_table div a:last-child span.pagar{
+    background-color: #014704;
+}
+
+.table .body_table div a:last-child span.editar{
+    background-color: #0298cf;
+}
+
+.table .body_table div a:last-child span.deletar{
+    background-color: #f80000;
+}
+
+.back_box_compra, .back_box_pagamento{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    z-index: 1;
+    background-color: rgba(255, 255, 255, .8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.back_box_compra .box_compra, .back_box_pagamento .box_pagamento{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    max-width: 600px;
+    width: 90vw;
+    background-color: var(--color-white);
+    border: solid 1px gainsboro;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    max-height: calc(100vh - 2rem);
+    overflow: auto;
+}
+
+.back_box_compra .top, .back_box_pagamento .top{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0 .5rem 0;
+}
+
+.back_box_compra .top .close, .back_box_pagamento .top .close{
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.back_box_compra input, .back_box_compra textarea, .back_box_compra .valor_total, 
+.back_box_pagamento input, .back_box_pagamento textarea, .back_box_pagamento .valor_total, 
+.back_box_pagamento .nome_loja, .back_box_pagamento select, .back_box_pagamento .valor_parcela_pagamento{
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    outline: none;
+    width: 100%;
+    padding: .5rem;
+    transition: all .1s linear;
+    -webkit-transition: all .1s linear;
+    -moz-transition: all .1s linear;
+    -webkit-appearance: none;
+    box-shadow: inset 5rem 5rem white;
+    color: #000;
+}
+
+.back_box_compra input[disabled], .back_box_compra .valor_total,
+.back_box_pagamento input[disabled], .back_box_pagamento .valor_total, 
+.back_box_pagamento .nome_loja, .back_box_pagamento .valor_parcela_pagamento{
+    background-color: #f3f3f3;
+    box-shadow: none;
+}
+
+.back_box_compra .bottom, .back_box_pagamento .bottom{
+    margin: 2rem 0.5rem 0;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.back_box_compra button, .back_box_pagamento button{
+    cursor: pointer;
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.5rem;
+    font-size: 1.15rem;
+    color: white;
+    font-weight: bold;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0.2rem 0.2rem 0.2rem grey;
+    transition: all ease 300ms;
+}
+
+.back_box_compra button:hover, .back_box_pagamento button:hover{
+    box-shadow: none;
+}
+
+.back_box_compra button.adicionar, .back_box_pagamento  button.pagar{
+    background-color: var(--color-primary);
+}
+
+.back_box_compra button.cancelar, .back_box_pagamento button.cancelar{
+    background-color: #3b3b3b;
+}
+
+.back_box_compra button.gerar_parcelas, .back_box_pagamento button.gerar_parcelas{
+    padding: 0.6rem 1.5rem;
+    background-color: #0298cf;
+}
+
+.back_box_compra .qtd_parcela{
+    display: flex;
+    align-items: flex-end;
+}
+
+.controle_grafico{
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.controle_grafico select{
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    outline: none;
+    width: auto;
+    padding: .5rem;
+    transition: all .1s linear;
+    appearance: auto;
+    color: #000;
+}
+
+.controle_grafico select option{
+    border-radius: 0;
+}
+
+
+@media (min-width: 700px) {
+    
+
+::-webkit-scrollbar {
+    width: .5rem;
+    height: .5rem;
+    position: absolute;;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-primary); 
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-primary); 
+  }
+}

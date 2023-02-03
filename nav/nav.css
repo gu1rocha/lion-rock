@@ -1,0 +1,122 @@
+body{
+    padding: 6rem 0 2rem;
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+    background-color: var(--color-white);
+    padding: 1rem 0;
+}
+
+nav .container{
+    display: flex;
+    width: 96%;
+    margin: 0 auto;
+    gap: .5rem;
+    grid-template-columns: 3rem calc(96% - 20rem) 4rem;
+    align-items: center;
+    justify-content: space-between;
+    justify-items: center;
+}
+
+nav .container .left{
+    display: inline-block;
+}
+
+nav .container .left #menu-btn{
+    background-color: transparent;
+    color: var(--color-dark);
+    cursor: pointer;
+    display: none;
+}
+
+nav .container .left .logo{
+    filter: drop-shadow(0.2rem 0.1rem white);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 3em;
+    display: block;
+}
+
+nav .container .theme-btn {
+    display: flex;
+    background-color: var(--color-light);
+    width: 4rem;
+    height: 2rem;
+    border-radius: var(--border-radius-2);
+    cursor: pointer;
+}
+
+nav .container .theme-btn span {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+}
+
+nav .container .theme-btn .active {
+    background-color: var(--color-dark);
+    border-radius: var(--border-radius-2);
+    color: var(--color-white);
+}
+
+nav .container .search-bar{
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    width: 100%;
+    max-width: 800px;
+    border-radius: var(--border-radius-3);
+    padding: .5rem 1rem;
+    background-color: var(--color-light);
+}
+
+nav .container .search-bar .search{
+    cursor: pointer;
+}
+
+nav .container .search-bar input{
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+    color: var(--color-dark);
+}
+
+nav .container .left .logo{
+    width: 3rem;
+}
+
+nav .container .nome {
+    font-weight: bold;
+    font-size: 1.75rem;
+}
+
+@media screen and (max-width: 768px){
+    nav .container{
+        grid-template-columns: 3rem auto 4rem;
+    }
+}
+
+@media screen and (min-width: 1350px){
+    .inventory, nav .container .left .logo{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1540px){
+    nav .container .left #menu-btn{
+        display: block;
+    }
+    nav .container .left {
+        display: inline-flex;
+        width: 50vw;
+        align-items: center;
+        justify-content: space-between;
+    }
+}

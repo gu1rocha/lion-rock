@@ -1,0 +1,124 @@
+.bgMessageBox{
+    position: fixed;
+    display: flex;
+    width: 100vw;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(255,255,255,0.8);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    z-index: 100;
+}
+
+.bgMessageBox .messageBox{
+    position: relative;
+    display: block;
+    width: calc(90% - 1em);
+    max-width: 35em;
+    height: auto;
+    max-height: 80%;
+    overflow: hidden auto;
+    background: white;
+    border-radius: 0.5em;
+    box-shadow: 0px 2px 10px grey;
+    transition: all ease 300ms;
+    color: #000;
+}
+
+.bgMessageBox .messageBox .titulo{
+    text-align: center;
+    padding: 0.5em;
+}
+
+.bgMessageBox .messageBox.danger .titulo{
+    background-color: var(--color-danger);
+    color: white;
+}
+
+.bgMessageBox .messageBox.success .titulo{
+    background-color: var(--color-success);
+}
+
+.bgMessageBox .messageBox.warning .titulo{
+    background-color: var(--color-warning);
+}
+
+.bgMessageBox .messageBox .boxTexto{
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.bgMessageBox .messageBox .boxTexto, .bgMessageBox .messageBox .boxInput{
+    padding: 0 1rem;
+}
+
+.bgMessageBox .messageBox .boxTexto p, .bgMessageBox .messageBox .boxInput p{
+    font-size: 1rem;
+}
+
+.bgMessageBox .messageBox .boxInput{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.bgMessageBox .messageBox .boxInput input{
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    outline: none;
+    font-size: 1.2rem;
+    padding: .5rem 1rem;
+    width: 9rem;
+}
+
+.bgMessageBox .messageBox .boxInput textarea{
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    outline: none;
+    font-size: 1.2rem;
+    padding: .5rem 1rem;
+    width: 100%;
+    resize: none;
+}
+
+.bgMessageBox .messageBox .boxButtons{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+}
+
+.bgMessageBox .messageBox.unit .boxButtons{
+    justify-content: center;
+}
+
+.bgMessageBox .messageBox .boxButtons button{
+    padding: .5rem;
+    border-radius: .5rem;
+    cursor: pointer;
+    box-shadow: .2rem .2rem .2rem grey;
+    transition: all ease 300ms;
+    color: white;
+    font-weight: bold;
+}
+
+.bgMessageBox .messageBox .boxButtons button:hover{
+    box-shadow: none;
+}
+
+.bgMessageBox .messageBox .boxButtons button.cancel{
+    background-color: #656668;
+}
+
+.bgMessageBox .messageBox.unit .boxButtons button.cancel{
+    background-color: #007bff;
+}
+
+.bgMessageBox .messageBox .boxButtons button.accept{
+    background-color: #007bff;
+}

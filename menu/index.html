@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="/assets/css/inicialize.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+    <aside>
+        <div class="top">
+            <div class="logo">
+                <h2></h2>
+            </div>
+            <div class="close" id="close-btn">
+                <span class="material-symbols-sharp">close</span>
+            </div>
+        </div>
+        <div class="sidebar">
+            <a class="home" href="/lion&rock/">
+                <span class="material-symbols-sharp">home</span>
+                <h3>Página Inicial</h3>
+            </a>
+            <a class="agenda" href="/lion&rock/agenda/">
+                <span class="material-symbols-sharp">calendar_month</span>
+                <h3>Agenda</h3>
+            </a>
+            <a class="dashboard hidden" href="/lion&rock/dashboard/">
+                <span class="material-symbols-sharp">grid_view</span>
+                <h3>Dashboard</h3>
+            </a>
+            <a class="cliente_fornecedor" href="/lion&rock/cliente_fornecedor/">
+                <span class="material-symbols-sharp">group</span>
+                <h3>Cliente/Fornecedor</h3>
+            </a>
+            <a class="drop" onclick="Show_drop(this)">
+                <span class="material-symbols-sharp">arrow_forward_ios</span>
+                <h3>Financeiro</h3>
+            </a>
+            <div class="box_drop hidden">
+                <a class="contas_pagar" href="/lion&rock/contas_pagar/">
+                    <span class="material-symbols-sharp">payments</span>
+                    <h3>Contas a pagar</h3>
+                </a>
+                <a class="contas_receber" href="/lion&rock/contas_receber/">
+                    <span class="material-symbols-sharp">savings</span>
+                    <h3>Contas a receber</h3>
+                </a>
+            </div>
+            <a class="produtos hidden" href="/lion&rock/produtos/">
+                <span class="material-symbols-sharp">inventory_2</span>
+                <h3>Produtos</h3>
+            </a>
+            <a class="mensagens hidden">
+                <span class="material-symbols-sharp">mail</span>
+                <h3>Mensagens</h3>
+                <span class="message-count">15</span>
+            </a>
+            <a class="configuracoes hidden" href="/lion&rock/configuracoes/">
+                <span class="material-symbols-sharp">settings</span>
+                <h3>Configurar Dados</h3>
+            </a>
+            <a class="usuarios hidden" href="/lion&rock/usuarios/">
+                <span class="material-symbols-sharp">manage_accounts</span>
+                <h3>Usuários</h3>
+            </a>
+            <a id="logout" class="logout hidden">
+                <span class="material-symbols-sharp">logout</span>
+                <h3>Logout</h3>
+            </a>
+            <a id="showLogin" class="login hidden">
+                <span class="material-symbols-sharp">login</span>
+                <h3>Login</h3>
+            </a>
+        </div>
+    </aside>
+</body>
+</html>
