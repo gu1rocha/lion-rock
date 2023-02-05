@@ -78,7 +78,7 @@ let Show_box_fornecedor_cliente = (id) => {
         document.querySelector('.back_box_fornecedor_cliente .adicionar').innerText = "Editar"
         Aparecer_obj(document.querySelector(".back_box_fornecedor_cliente"))
     }else{
-        box_compra.querySelector('.adicionar').innerText = "Adicionar"
+        document.querySelector('.back_box_fornecedor_cliente .adicionar').innerText = "Adicionar"
         Aparecer_obj(document.querySelector(".back_box_fornecedor_cliente"))
     }
 }
@@ -107,7 +107,7 @@ document.querySelector(".box_fornecedor_cliente").addEventListener("submit",(e)=
                                     obs_fornecedor_cliente: document.querySelector(".back_box_fornecedor_cliente .box_fornecedor_cliente #obs_fornecedor_cliente").value,
                                 }
                             }else{
-                                return compra
+                                return forn_cli
                             }
                         })
                         localStorage.setItem('Fornecedor_Cliente',JSON.stringify(new_Fornecedor_Cliente))
@@ -171,7 +171,7 @@ let Deletar_fornecedor_cliente = id =>{
         showMessageBox().showMessage({
             type: 'danger',
             title: 'ERRO DESCONHECIDO',
-            text: `ERRO DESCONHECIDO AO TENTAR EXCLUIR COMPRA!`
+            text: `ERRO DESCONHECIDO AO TENTAR EXCLUIR CADASTRO!`
         })
     }
 }
@@ -220,7 +220,7 @@ let Acoes_fornecedor_cliente = (id, obj) =>{
         showMessageBox().showMessage({
             type: 'danger',
             title: 'ERRO DESCONHECIDO',
-            text: `ERRO DESCONHECIDO AO TENTAR EXCLUIR COMPRA!`
+            text: `ERRO DESCONHECIDO AO TENTAR EXCLUIR CADASTRO!`
         })
     }
 } 
