@@ -23,6 +23,7 @@
     <script src="./../menu/assets/js/script.js" defer></script>
     
     <link rel="stylesheet" href="./../assets/css/table.css">
+    <link rel="stylesheet" href="./../assets/css/inputs.css">
 
     <link rel="stylesheet" href="./assets/css/style.css">
     <script src="./assets/js/script.js" defer="defer"></script>
@@ -36,6 +37,25 @@
           <div class="box_input box_search">
               <input type="search" placeholder="Pesquisar">
               <span class="material-symbols-sharp search">search</span>
+          </div>
+          <div class="box_filtros">
+            <div class="box_input">
+                <label for="situacao">Situação</label>
+                <select name="situacao" id="situacao">
+                    <option value=""></option>
+                    <option value="true">Ativo</option>
+                    <option value="false">Inativo</option>
+                </select>
+            </div>
+            <div class="box_input">
+                <label for="tipo">Tipo de cadastro</label>
+                <select name="tipo" id="tipo">
+                    <option value=""></option>
+                    <option value="0">Ambos</option>
+                    <option value="1">Fornecedor</option>
+                    <option value="2">Cliente</option>
+                </select>
+            </div>
           </div>
         </div>
         <div class="vazio hidden">

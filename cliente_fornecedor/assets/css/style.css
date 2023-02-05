@@ -6,6 +6,7 @@
     margin: 1rem 0;
     padding: .5rem 0;
     gap: .5rem;
+    flex-wrap: wrap;
 }
 
 .box_btn button {
@@ -30,6 +31,9 @@
     background-color: white;
     display: inline-flex;
     gap: .5rem;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin: 0;
 }
 
 .box_btn .box_search span{
@@ -38,6 +42,11 @@
 
 .box_btn .box_search input::placeholder{
     color: var(--color-primary);
+}
+
+.box_filtros{
+    display: flex;
+    width: 100%;
 }
 
 .vazio {

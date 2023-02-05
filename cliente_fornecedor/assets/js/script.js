@@ -1,10 +1,28 @@
 let Fornecedor_Cliente = [], id_Fornecedor_Cliente = undefined
 
+let Verificar_select_situacao = (params)=>{
+    if(!!params.select.value){
+        return params.valor === JSON.parse(params.select.value)
+    }
+    return true
+}
+
+let Verificar_select = (params)=>{
+    if(!!params.select.value){
+        return params.valor == params.select.value
+    }
+    return true
+}
+
 let Listar_fornecedor_cliente = ()=>{
   if((!!JSON.parse(localStorage.getItem("Fornecedor_Cliente")) && JSON.parse(localStorage.getItem("Fornecedor_Cliente")).length)){
     Fornecedor_Cliente = JSON.parse(localStorage.getItem("Fornecedor_Cliente"))
     document.querySelector(".table .body_table").innerHTML = ''
-    Fornecedor_Cliente = Fornecedor_Cliente.filter(item=> StringtoSearch(item.fornecedor_cliente.toLowerCase()).includes(StringtoSearch(document.querySelector('.box_search input').value.toLowerCase())) )
+    Fornecedor_Cliente = Fornecedor_Cliente.filter(item=> {
+        return StringtoSearch(item.fornecedor_cliente.toLowerCase()).includes(StringtoSearch(document.querySelector('.box_search input[type=search]').value.toLowerCase())) 
+        && Verificar_select_situacao({select: document.querySelector(".box_filtros #situacao"), valor: item.situacao_cadastro})
+        && Verificar_select({select: document.querySelector(".box_filtros #tipo"), valor: item.tipo_cadastro})
+    })
     if(Fornecedor_Cliente.length > 0){
         for (var for_cli of Fornecedor_Cliente) {
             
