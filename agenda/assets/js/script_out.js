@@ -48,10 +48,10 @@ const Renderizar_calendario = ()=>{
     dias_loop += `<div class="prev_dia">${prev_ultimo_dia - i + 1}</div>`;
   }
 
-  if(!!JSON.parse(localStorage.getItem("Compras")) && JSON.parse(localStorage.getItem("Compras")).length) {
-    compras = JSON.parse(localStorage.getItem("Compras"));
-    compras_calendario = compras.filter((compra) => new Date(compra.data) < ultimo_dia && new Date(compra.data) > primeiro_dia)
-    compras_dias = [...new Set(compras_calendario.map((compra) => new Date(compra.data).getDate()))]
+  if(!!JSON.parse(localStorage.getItem("Contas_pagar")) && JSON.parse(localStorage.getItem("Contas_pagar")).length) {
+    compras = JSON.parse(localStorage.getItem("Contas_pagar"));
+    compras_calendario = compras.filter((compra) => new Date(compra.data_vencimento) <= ultimo_dia && new Date(compra.data_vencimento) > primeiro_dia)
+    compras_dias = [...new Set(compras_calendario.map((compra) => new Date(compra.data_vencimento).getDate()))]
   }
 
   for (let i = 1; i <= ultimo_dia_extenso; i++) {
@@ -107,21 +107,24 @@ let Show_box_evento = (ano, mes, dia) =>{
   : document.querySelector('body').classList.add('noScrool')
 
   back_box_eventos.classList.toggle('hidden')
-  let contas_pagar_dia = compras.filter((compra) => new Date(ano, mes, dia).toLocaleDateString() === new Date(compra.data).toLocaleDateString())
+  let contas_pagar_dia = compras.filter((compra) => new Date(ano, mes, dia).toLocaleDateString() === new Date(compra.data_vencimento).toLocaleDateString())
   document.querySelector('.box_eventos .tarefas.contas_pagar .body_table').innerHTML = '';
   document.querySelector('.box_eventos .tarefas.contas_pagar .table_total').innerText = '';
   if(!!contas_pagar_dia.length){
     let total_pagar = 0
     document.querySelector('.box_eventos .tarefas.contas_pagar .body_table').innerHTML = ''
     for (const iterator of contas_pagar_dia) {
-      total_pagar += iterator.valor
+      console.log(new Date(new Date().getFullYear(),new Date().getMonth(),new Date().getDate()), new Date(iterator.data_vencimento),(new Date(new Date().getFullYear(),new Date().getMonth(),new Date().getDate()) - new Date(iterator.data_vencimento))/ (1000 * 60 * 60 * 24))
+      total_pagar += +iterator.valor_total
       document.querySelector('.box_eventos .tarefas.contas_pagar .body_table').innerHTML += 
       `
         <div>
-          <a>${new Date(iterator.data).getDate()}</a>
-          <a>${iterator.loja}</a>
-          <a>${iterator.valor.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</a>
-          <a></a>
+          <a>${new Date(iterator.data_vencimento).getDate()}</a>
+          <a>${iterator.fornecedor}</a>
+          <a>${(+iterator.valor_total).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</a>
+          ${!!iterator.situacao_pagamento? '<a class="status success">Pago</a>': new Date(iterator.data_vencimento) >= new Date() 
+          ? '<a class="status warning">A pagar</a>' 
+          : `<a class="status danger">Atrasado ${(new Date(new Date().getFullYear(),new Date().getMonth(),new Date().getDate()) - new Date(iterator.data_vencimento))/ (1000 * 60 * 60 * 24)} dias</a>`}
         </div>
       `
     }

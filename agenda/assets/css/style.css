@@ -234,3 +234,23 @@ span.compromisso {
     font-weight: bold;
     cursor: pointer;
 }
+
+.back_box_eventos .box_eventos .status, .box_tarefas .tarefas .status{
+  font-weight: bolder;
+}
+
+.back_box_eventos .box_eventos .primary, .box_tarefas .tarefas .primary{
+  color: var(--color-primary);
+}
+
+.back_box_eventos .box_eventos .danger, .box_tarefas .tarefas .danger{
+  color: var(--color-danger);
+}
+
+.back_box_eventos .box_eventos .success, .box_tarefas .tarefas .success{
+  color: var(--color-success);
+}
+
+.back_box_eventos .box_eventos .warning, .box_tarefas .tarefas .warning{
+  color: var(--color-warning);
+}
