@@ -128,7 +128,7 @@ input[type="search"]::-webkit-search-cancel-button {
     pointer-events: none;
     cursor: pointer;
 
-    filter: invert(var(--invert));
+    /* filter: invert(var(--invert)); */
 }
 
 input[type="search"]:focus::-webkit-search-cancel-button {

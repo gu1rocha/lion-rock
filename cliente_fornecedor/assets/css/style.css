@@ -1,6 +1,11 @@
-.box_btn {
+.box_btn{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
     width: 100%;
-    margin: 2rem auto 2rem;
+    margin: 1rem 0;
+    padding: .5rem 0;
+    gap: .5rem;
 }
 
 .box_btn button {
@@ -15,6 +20,24 @@
 .box_btn button:hover {
     cursor: pointer;
     box-shadow: none;
+}
+
+.box_btn .box_search{
+    padding: 0.4rem .5rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--color-primary);
+    color: var(--color-primary);
+    background-color: white;
+    display: inline-flex;
+    gap: .5rem;
+}
+
+.box_btn .box_search span{
+    cursor: pointer;
+}
+
+.box_btn .box_search input::placeholder{
+    color: var(--color-primary);
 }
 
 .vazio {

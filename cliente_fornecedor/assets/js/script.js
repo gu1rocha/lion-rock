@@ -1,35 +1,43 @@
 let Fornecedor_Cliente = [], id_Fornecedor_Cliente = undefined
 
-
 let Listar_fornecedor_cliente = ()=>{
   if((!!JSON.parse(localStorage.getItem("Fornecedor_Cliente")) && JSON.parse(localStorage.getItem("Fornecedor_Cliente")).length)){
     Fornecedor_Cliente = JSON.parse(localStorage.getItem("Fornecedor_Cliente"))
     document.querySelector(".table .body_table").innerHTML = ''
-    for (var for_cli of Fornecedor_Cliente) {
-        
-        document.querySelector(".table .body_table").innerHTML +=   
-        `
-            <div>
-                <a onclick="Show_box_fornecedor_cliente(${for_cli.id})">${for_cli.situacao_cadastro ? 'Ativo' : 'Inativo'}</a>
-                <a onclick="Show_box_fornecedor_cliente(${for_cli.id})">${for_cli.tipo_cadastro == 0 ? 'Ambos' : for_cli.tipo_cadastro == 1 ? 'Fornecedor' : 'Cliente'}</a>
-                <a class="nome_fornecedor_cliente" onclick="Show_box_fornecedor_cliente(${for_cli.id})">${for_cli.fornecedor_cliente}</a>
-                <a>
-                    <span class="material-symbols-sharp editar" onclick="Show_box_fornecedor_cliente(${for_cli.id})" data-texto="Editar">edit_square</span>
-                    <span class="material-symbols-sharp deletar" onclick="Deletar_fornecedor_cliente(${for_cli.id})" data-texto="Excluir">delete</span>
-                    <div onclick="Acoes_fornecedor_cliente(${for_cli.id},this)">
-                        <span class="material-symbols-sharp acoes" data-texto="Ações">expand_circle_down</span>
-                    </div>
-                </a>
-            </div>
-        `
+    Fornecedor_Cliente = Fornecedor_Cliente.filter(item=> StringtoSearch(item.fornecedor_cliente.toLowerCase()).includes(StringtoSearch(document.querySelector('.box_search input').value.toLowerCase())) )
+    if(Fornecedor_Cliente.length > 0){
+        for (var for_cli of Fornecedor_Cliente) {
+            
+            document.querySelector(".table .body_table").innerHTML +=   
+            `
+                <div>
+                    <a onclick="Show_box_fornecedor_cliente(${for_cli.id})">${for_cli.situacao_cadastro ? 'Ativo' : 'Inativo'}</a>
+                    <a onclick="Show_box_fornecedor_cliente(${for_cli.id})">${for_cli.tipo_cadastro == 0 ? 'Ambos' : for_cli.tipo_cadastro == 1 ? 'Fornecedor' : 'Cliente'}</a>
+                    <a class="nome_fornecedor_cliente" onclick="Show_box_fornecedor_cliente(${for_cli.id})">${for_cli.fornecedor_cliente}</a>
+                    <a>
+                        <span class="material-symbols-sharp editar" onclick="Show_box_fornecedor_cliente(${for_cli.id})" data-texto="Editar">edit_square</span>
+                        <span class="material-symbols-sharp deletar" onclick="Deletar_fornecedor_cliente(${for_cli.id})" data-texto="Excluir">delete</span>
+                        <div onclick="Acoes_fornecedor_cliente(${for_cli.id},this)">
+                            <span class="material-symbols-sharp acoes" data-texto="Ações">expand_circle_down</span>
+                        </div>
+                    </a>
+                </div>
+            `
+        }
+        Esconder_obj(document.querySelector(".vazio"))
+        Aparecer_obj(document.querySelector(".table"))
+    }else{
+        Aparecer_obj(document.querySelector(".vazio"))
+        Esconder_obj(document.querySelector(".table"))
     }
-    Esconder_obj(document.querySelector(".vazio"))
-    Aparecer_obj(document.querySelector(".table"))
   }else{
     Aparecer_obj(document.querySelector(".vazio"))
     Esconder_obj(document.querySelector(".table"))
   }
 }
+
+document.querySelector('.box_search input').addEventListener('keypress',(e)=>{if (e.keyCode === 13 || e.which === 13) {Listar_fornecedor_cliente()}})
+document.querySelector('.box_search span.search').addEventListener('click',()=>{Listar_fornecedor_cliente()})
 
 document.querySelector(".box_btn button").addEventListener("click",()=>{
     id_Fornecedor_Cliente = undefined
@@ -181,27 +189,27 @@ let Acoes_fornecedor_cliente = (id, obj) =>{
                     ? `
                         <li>
                             <a href="#">
-                                <span class="material-symbols-sharp acoes" data-texto="Add recebimento">expand_circle_down</span>Novo recebimento
+                                <span class="material-symbols-sharp acoes" data-texto="Add recebimento">add_circle</span>Novo recebimento
                             </a>
                         </li>
                         <li>
-                            <a href="/lion&rock/contas_pagar/?f=${id}">
-                                <span class="material-symbols-sharp acoes" data-texto="Add pagamento">expand_circle_down</span>Novo pagamento
+                            <a href="/lion-rock/contas_pagar/?f=${id}">
+                                <span class="material-symbols-sharp acoes" data-texto="Add pagamento">add_circle</span>Novo pagamento
                             </a>
                         </li>
                     `  
                     : for_cli == 1 
                         ? `
                             <li>
-                                <a href="/lion&rock/contas_pagar/?f=${id}">
-                                    <span class="material-symbols-sharp acoes" data-texto="Add pagamento">expand_circle_down</span>Novo pagamento
+                                <a href="/lion-rock/contas_pagar/?f=${id}">
+                                    <span class="material-symbols-sharp acoes" data-texto="Add pagamento">add_circle</span>Novo pagamento
                                 </a>
                             </li>
                         ` 
                         : `
                             <li>
                                 <a href="#">
-                                    <span class="material-symbols-sharp acoes" data-texto="Add recebimento">expand_circle_down</span>Novo recebimento
+                                    <span class="material-symbols-sharp acoes" data-texto="Add recebimento">add_circle</span>Novo recebimento
                                 </a>
                             </li>
                         `
