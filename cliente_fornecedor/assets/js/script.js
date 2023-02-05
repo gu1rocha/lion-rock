@@ -41,12 +41,12 @@ document.querySelector('.box_search span.search').addEventListener('click',()=>{
 
 document.querySelector(".box_btn button").addEventListener("click",()=>{
     id_Fornecedor_Cliente = undefined
-    Aparecer_obj(document.querySelector(".back_box_fornecedor_cliente"))
+    Show_box_fornecedor_cliente()
 })
 
 document.querySelector(".vazio button").addEventListener("click",()=>{
     id_Fornecedor_Cliente = undefined
-    Aparecer_obj(document.querySelector(".back_box_fornecedor_cliente"))
+    Show_box_fornecedor_cliente()
 })
 
 document.querySelector(".box_fornecedor_cliente .close").addEventListener("click",()=>{
