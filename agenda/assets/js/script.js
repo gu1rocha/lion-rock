@@ -77,12 +77,12 @@ const Renderizar_calendario = ()=>{
       document.querySelector('.box_tarefas .tarefas.contas_pagar .body_table').innerHTML += 
       `
         <div>
+        ${!!iterator.situacao_pagamento? '<a class="status success">Pago</a>': new Date(iterator.data_vencimento) >= new Date() 
+        ? '<a class="status warning">A pagar</a>' 
+        : `<a class="status danger">Atrasado ${(new Date(new Date().getFullYear(),new Date().getMonth(),new Date().getDate()) - new Date(iterator.data_vencimento))/ (1000 * 60 * 60 * 24)} dias</a>`}
           <a>${new Date(iterator.data_vencimento).getDate()}</a>
           <a>${iterator.fornecedor}</a>
           <a>${(+iterator.valor_total).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</a>
-          ${!!iterator.situacao_pagamento? '<a class="status success">Pago</a>': new Date(iterator.data_vencimento) >= new Date() 
-          ? '<a class="status warning">A pagar</a>' 
-          : `<a class="status danger">Atrasado ${(new Date(new Date().getFullYear(),new Date().getMonth(),new Date().getDate()) - new Date(iterator.data_vencimento))/ (1000 * 60 * 60 * 24)} dias</a>`}
         </div>
       `
     }

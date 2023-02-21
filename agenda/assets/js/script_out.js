@@ -114,18 +114,16 @@ let Show_box_evento = (ano, mes, dia) =>{
     let total_pagar = 0
     document.querySelector('.box_eventos .tarefas.contas_pagar .body_table').innerHTML = ''
     for (const iterator of contas_pagar_dia) {
-      console.log(new Date(new Date().getFullYear(),new Date().getMonth(),new Date().getDate()), new Date(iterator.data_vencimento),(new Date(new Date().getFullYear(),new Date().getMonth(),new Date().getDate()) - new Date(iterator.data_vencimento))/ (1000 * 60 * 60 * 24))
       total_pagar += +iterator.valor_total
       document.querySelector('.box_eventos .tarefas.contas_pagar .body_table').innerHTML += 
       `
         <div>
-          <a>${new Date(iterator.data_vencimento).getDate()}</a>
-          <a>${iterator.fornecedor}</a>
-          <a>${(+iterator.valor_total).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</a>
           ${!!iterator.situacao_pagamento? '<a class="status success">Pago</a>': new Date(iterator.data_vencimento) >= new Date() 
           ? '<a class="status warning">A pagar</a>' 
           : `<a class="status danger">Atrasado ${(new Date(new Date().getFullYear(),new Date().getMonth(),new Date().getDate()) - new Date(iterator.data_vencimento))/ (1000 * 60 * 60 * 24)} dias</a>`}
-        </div>
+          <a>${new Date(iterator.data_vencimento).getDate()}</a>
+          <a>${iterator.fornecedor}</a>
+          <a>${(+iterator.valor_total).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</a></div>
       `
     }
     document.querySelector('.box_eventos .tarefas.contas_pagar .table_total').innerText = `Valor total: ${total_pagar.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}`

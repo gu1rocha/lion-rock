@@ -8,7 +8,7 @@ nav {
     z-index: 1;
     width: 100%;
     background-color: var(--color-white);
-    padding: 1rem 0;
+    padding: .5rem 0;
 }
 
 nav .container{
@@ -34,12 +34,19 @@ nav .container .left #menu-btn{
 }
 
 nav .container .left .logo{
-    filter: drop-shadow(0.2rem 0.1rem white);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-    height: 3em;
-    display: block;
+    display: flex;
+    height: 4em;
+    width: 13rem;
+    overflow: hidden;
+    align-items: center;
+}
+
+nav .container .left .logo img{
+    height: 4em;
+}
+
+body.dark-theme-variables nav .container .left .logo img{
+    filter: invert(200%) contrast(200%) brightness(200%);
 }
 
 nav .container .theme-btn {
@@ -88,10 +95,6 @@ nav .container .search-bar input{
     color: var(--color-dark);
 }
 
-nav .container .left .logo{
-    width: 3rem;
-}
-
 nav .container .nome {
     font-weight: bold;
     font-size: 1.75rem;
@@ -114,9 +117,18 @@ nav .container .left #menu-btn{
 
 nav .container .left {
     display: inline-flex;
-    width: 50vw;
+    width: calc(50vw + 3rem);
     align-items: center;
     justify-content: space-between;
+}
+
+@media screen and (max-width: 900px){
+    nav .container .left .logo{
+        width: 4rem;
+    }
+    nav .container .left {
+        width: calc(50vw + 1.5rem);
+    }
 }
 
 /* @media screen and (max-width: 1540px){

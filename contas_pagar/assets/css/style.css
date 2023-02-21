@@ -1,24 +1,174 @@
-:root{
-    --col: 6;
-}
-
-.box_btn {
+.box_btn{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
-    margin: 2rem auto 2rem;
+    margin: 1rem 0 0;
+    padding: .5rem 0;
+    flex-wrap: wrap;
 }
 
 .box_btn button {
-    padding: .5rem 1rem;
+    padding: .6rem 1rem;
     border-radius: var(--border-radius-1);
     box-shadow: var(--box-shadow);
     font-weight: bold;
     background-color: var(--color-primary);
-    color: var(--color-white);
+    color: #fff;
 }
 
-.box_btn button:hover {
+.box_btn button:hover{
     cursor: pointer;
     box-shadow: none;
+}
+
+.box_btn .box_search{
+    width: 10rem;
+    padding: 0.4rem .5rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--color-primary);
+    color: var(--color-primary);
+    background-color: white;
+    display: inline-flex;
+    gap: .5rem;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin: 0;
+    vertical-align: top;
+}
+
+.box_btn .box_search span{
+    cursor: pointer;
+}
+
+.box_btn .box_search input{
+    width: 75%;
+}
+
+.box_btn .box_search input::placeholder{
+    color: var(--color-primary);
+}
+
+.show_filtros{
+    display: inline-flex;
+    align-items: center;
+    padding: 0.4rem 0.5rem;
+    border: 1px solid;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.show_filtros .icon_arrow{
+    transition: all 300ms ease;
+}
+
+.show_filtros .collapsed{
+    transform: rotate(180deg);
+}
+
+.box_filtros{
+    transition: height .4s;
+    overflow: hidden;
+    background-color: #f1ffff;
+    margin-top: 1rem;
+    height: 0;
+}
+
+body.dark-theme-variables .box_filtros{
+    background-color: #0A181C;
+}
+
+.box_filtros > div{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0.5rem;
+}
+
+.box_filtros.ativo{
+    height: 17rem;
+}
+
+.box_filtros .grupo_box_input{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    margin: 1rem 0.5rem 0;
+    position: relative;
+    height: max-content;
+    width: 24rem;
+}
+
+.box_filtros .grupo_box_input > label{
+    width: 100%;
+}
+
+.box_filtros .grupo_box_input .box_input{
+    margin: 0;
+    flex-direction: row;
+    height: fit-content;
+    align-items: center;
+}
+
+@media (max-width: 767px) {
+    .box_filtros.ativo{
+        height: 28rem;
+    }
+}
+
+@media (max-width: 404px) {
+    .box_filtros.ativo{
+        height: 38rem;
+    }
+    .box_filtros .grupo_box_input .box_input{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+.box_filtros .btn_dropdown{
+    display: inline-flex;
+    align-items: center;
+    padding: 0.4rem 0.5rem;
+    border: 1px solid lightgrey;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    background-color: #fff;
+    color: #000;
+    width: 16rem;
+}
+
+.box_filtros .btn_dropdown .filter_option{
+    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.box_filtros .box_lista_categoria{
+    position: absolute;
+    top: 4.5rem;
+    width: 100%;
+    height: 10rem;
+    max-height: 10rem;
+    overflow: auto;
+    z-index: 1;
+}
+
+.box_filtros .box_lista_categoria ul{
+    top: 0;
+    margin: 0;
+}
+
+.box_filtros .box_lista_categoria ul li.checked:before {
+  content: '\2713';
+  display: inline-block;
+  color: var(--color-primary);
+  padding: 0 1rem 0 0;
+  font-weight: bold;
+}
+
+.box_filtros .box_lista_categoria ul a{
+    color: #000;
 }
 
 .vazio{
@@ -42,7 +192,7 @@
     box-shadow: var(--box-shadow);
     font-weight: bold;
     background-color: var(--color-primary);
-    color: var(--color-white);
+    color: #fff;
     margin-top: 2rem;
 }
 
@@ -72,7 +222,7 @@
 
 .table .head_table{
     display: grid;
-    grid-template-columns: repeat(var(--col), calc(100%/var(--col)));
+    grid-template-columns: repeat(6, calc(100%/6));
     font-weight: bold;
     white-space: nowrap;
     text-align: center;
@@ -81,7 +231,7 @@
 
 .table .body_table div{
     display: grid;
-    grid-template-columns: repeat(var(--col), calc(100%/var(--col)));
+    grid-template-columns: repeat(6, calc(100%/6));
     align-items: center;
     height: 3.7rem;
     min-width: 700px;
@@ -109,6 +259,7 @@
     cursor: pointer;
     box-shadow: 0.2rem 0.2rem 0.2rem grey;
     transition: all ease 300ms;
+    position: relative;
 }
 
 .table .body_table div a:last-child span:hover{
@@ -116,15 +267,57 @@
 }
 
 .table .body_table div a:last-child span.pagar{
-    background-color: #014704;
+    background-color: var(--color-primary);
 }
 
 .table .body_table div a:last-child span.editar{
-    background-color: #0298cf;
+    background-color: var(--color-primary-light);
 }
 
 .table .body_table div a:last-child span.deletar{
-    background-color: #f80000;
+    background-color: var(--color-danger);
+}
+
+.table .body_table div a:last-child span.estornar{
+    background-color: var(--color-warning);
+}
+
+.table .body_table div a:last-child span:after , .table .body_table div a:last-child span:before{
+    position: absolute;
+    pointer-events: none;
+    -webkit-font-smoothing: auto;
+    text-rendering: auto;
+    visibility: hidden;
+    opacity: 0;
+    transition: all .12s ease-in;
+    z-index: 1;
+    font-family: poppins, sans-serif;
+}
+
+.table .body_table div a:last-child span:after {
+    content: attr(data-texto);
+    padding: 5px 12px;
+    font-size: 12px;
+    color: #fff;
+    font-weight: 200;
+    white-space: pre;
+    border-radius: 3px;
+    background: #505050;
+    bottom: calc(100% + 15px);
+}
+
+.table .body_table div a:last-child span:before {
+    content: "";
+    border: 6px solid #505050;
+    top: -15px;
+    border-left-color: transparent;
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+}
+
+.table .body_table div a:last-child span:hover::after, .table .body_table div a:last-child span:hover::before{
+    visibility: visible;
+    opacity: 1;
 }
 
 .back_box_compra, .back_box_pagamento{
@@ -166,7 +359,7 @@
     cursor: pointer;
 }
 
-.back_box_compra input, .back_box_compra textarea, .back_box_compra .valor_total, 
+.box_filtros input, .back_box_compra input, .back_box_compra textarea, .back_box_compra .valor_total, 
 .back_box_pagamento input, .back_box_pagamento textarea, .back_box_pagamento .valor_total, 
 .back_box_pagamento .nome_loja, .back_box_pagamento select, .back_box_pagamento .valor_parcela_pagamento{
     border: 1px solid lightgrey;

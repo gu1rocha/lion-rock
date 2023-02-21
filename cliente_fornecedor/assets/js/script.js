@@ -54,6 +54,11 @@ let Listar_fornecedor_cliente = ()=>{
   }
 }
 
+document.querySelector('.show_filtros').addEventListener('click',()=>{
+    document.querySelector('.show_filtros .icon_arrow').classList.toggle('collapsed')
+    document.querySelector('.box_filtros').classList.toggle('ativo')
+})
+
 document.querySelector('.box_search input').addEventListener('keypress',(e)=>{if (e.keyCode === 13 || e.which === 13) {Listar_fornecedor_cliente()}})
 document.querySelector('.box_search span.search').addEventListener('click',()=>{Listar_fornecedor_cliente()})
 

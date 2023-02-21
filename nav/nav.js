@@ -5,9 +5,11 @@ document.querySelector('nav').innerHTML = `
             <span class="material-symbols-sharp">menu</span>
         </button>
         <a class="logo" href="/lion-rock/">
-            ${pathname == "home" 
-            ? '<img src="./assets/img/Logotipo lion&rock.svg">' 
-            : '<img src="./../assets/img/Logotipo lion&rock.svg">'}
+            <picture>
+                ${pathname == "home" 
+                ? '<source media="(max-width:900px)" srcset="./assets/img/logo.png"><img src="./assets/img/LR-CP-SF.png"">' 
+                : '<source media="(max-width:900px)" srcset="./../assets/img/logo.png"><img src="./../assets/img/LR-CP-SF.png">'}
+            </picture>
         </a>
         
     </div>
@@ -18,8 +20,8 @@ document.querySelector('nav').innerHTML = `
 </div>`
 
 document.querySelector('head').innerHTML += `${pathname == "home" 
-                                                ? '<link rel="icon" type="image/x-icon" href="./assets/img/Logotipo lion&rock.ico">' 
-                                                : '<link rel="icon" type="image/x-icon" href="./../assets/img/Logotipo lion&rock.ico">'}
+                                                ? '<link rel="icon" type="image/x-icon" href="./assets/img/L_R-BRASAO.ico">' 
+                                                : '<link rel="icon" type="image/x-icon" href="./../assets/img/L_R-BRASAO.ico">'}
 `
 
 const themeToggler = document.querySelector(".theme-btn");

@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Outfit:wght@100&family=Pacifico&family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
 :root{
-    --color-primary: #d42940;
+    --color-primary: #1c434f;
     --color-danger: #ff7782;
     --color-success: #41f1b6;
     --color-warning: #ffbb55;
@@ -11,8 +11,8 @@
     --color-info-light: #dce1eb;
     --color-dark: #363949;
     --color-light: rgba(132, 139, 200, 0.18);
-    --color-primary-dark: #980c25;
-    --color-primary-light: #ff3e52;
+    --color-primary-dark: #132D36;
+    --color-primary-light: #4DBADB;
     --color-dark-variant: #677483;
     --color-background: #f6f6f9;
 

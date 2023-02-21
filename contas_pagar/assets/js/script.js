@@ -15,28 +15,86 @@ const box_grafico = document.querySelector(".box_grafico")
 
 let id_compra = undefined, id_pagamento = undefined, pagamentos = [], contas_pagar = [], hoje = new Date(), pago = ""
 
+let Verificar_select_boolean = (params)=>{
+    if(!!params.select.value){
+        return params.valor === JSON.parse(params.select.value)
+    }
+    return true
+}
+
+let Verificar_data = params =>{
+    if(!!params.input.value){
+        return params.verificador == 'maior' 
+        ? (new Date(params.valor) >= new Date(new Date(params.input.value).setHours(new Date(params.input.value).getHours() + 3))) 
+        : (new Date(params.valor) <= new Date(new Date(params.input.value).setHours(new Date(params.input.value).getHours() + 3)))
+    }
+    return true
+}
+
+let Verificar_valor = params =>{
+    if(!!params.input.value){
+        return params.verificador == 'maior' 
+        ? +params.valor >= +params.input.value
+        : +params.valor <= +params.input.value
+    }
+    return true
+}
+
+let Verificar_select_ul = params =>{
+    if(!!params.select.value){
+        let selecteds = [...params.select.options].filter(option => option.selected).map(option => option.value)
+        if(selecteds.length === params.select.options.length){
+            return true
+        }else{
+            return selecteds.includes(params.valor)
+        }
+    }
+    return true
+}
+
 let Listar_compras = ()=>{
     if(!!JSON.parse(localStorage.getItem("Contas_pagar")) && JSON.parse(localStorage.getItem("Contas_pagar")).length) {
         contas_pagar = JSON.parse(localStorage.getItem("Contas_pagar"));
-        for (const compra of contas_pagar) {
-            corpo_tabela.innerHTML +=   `
-                                        <div>
-                                            <a>${dateToUTC(compra.data_vencimento)}</a>
-                                            <a>${compra.fornecedor}</a>
-                                            <a>${compra.categoria}</a>
-                                            <a>${compra.ocorrencia == 0 ? 'Unica' : compra.n_parcela+' / '+compra.qtd_parcelas}</a>
-                                            <a>${(compra.valor_total).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</a>
-                                            <a>
-                                                ${!compra.situacao_pagamento ? `<span class="material-symbols-sharp pagar" onclick="Show_box_pagamento(${compra.id})" data-texto="Pagar">payments</span>` : ''}
-                                                <span class="material-symbols-sharp editar" onclick="Editar_compra(${compra.id})" data-texto="Editar">edit_square</span>
-                                                <span class="material-symbols-sharp deletar" onclick="Deletar_compra(${compra.id})" data-texto="Excluir">delete</span>
-                                            </a>
-                                        </div>
-                                    `
+        corpo_tabela.innerHTML = ''
+        contas_pagar = contas_pagar.filter(item=> {
+            return StringtoSearch(item.fornecedor.toLowerCase()).includes(StringtoSearch(document.querySelector('.box_search input[type=search]').value.toLowerCase())) 
+            && Verificar_select_boolean({select: document.querySelector(".box_filtros #situacao"), valor: item.situacao_pagamento})
+            && Verificar_data({input:document.querySelector(".box_filtros #emissao_inicio"), valor: item.data_emissao, verificador: 'maior'})
+            && Verificar_data({input:document.querySelector(".box_filtros #emissao_fim"), valor: item.data_emissao, verificador: 'menor'})
+            && Verificar_data({input:document.querySelector(".box_filtros #vencimento_inicio"), valor: item.data_vencimento, verificador: 'maior'})
+            && Verificar_data({input:document.querySelector(".box_filtros #vencimento_fim"), valor: item.data_vencimento, verificador: 'menor'})
+            && Verificar_data({input:document.querySelector(".box_filtros #pagamento_inicio"), valor: item.data_pagamento, verificador: 'maior'})
+            && Verificar_data({input:document.querySelector(".box_filtros #pagamento_fim"), valor: item.data_pagamento, verificador: 'menor'})
+            && Verificar_valor({input:document.querySelector(".box_filtros #valor_inicio"), valor: item.valor_total, verificador: 'maior'})
+            && Verificar_valor({input:document.querySelector(".box_filtros #valor_fim"), valor: item.valor_total, verificador: 'menor'})
+            && Verificar_select_ul({select: document.getElementById('multiple_select_categoria'), valor: item.id_categoria})
+            //&& Verificar_select({select: document.querySelector(".box_filtros #tipo"), valor: item.tipo_cadastro})
+        })
+        if(contas_pagar.length > 0){
+            for (const compra of contas_pagar) {
+                corpo_tabela.innerHTML +=   `
+                                            <div>
+                                                <a>${dateToUTC(compra.data_vencimento)}</a>
+                                                <a>${compra.fornecedor}</a>
+                                                <a>${compra.categoria}</a>
+                                                <a>${compra.ocorrencia == 0 ? 'Unica' : compra.n_parcela+' / '+compra.qtd_parcelas}</a>
+                                                <a>${(+compra.valor_total).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</a>
+                                                <a>
+                                                    ${!compra.situacao_pagamento ? `<span class="material-symbols-sharp pagar" onclick="Show_box_pagamento(${compra.id})" data-texto="Pagar">payments</span>` : `<span class="material-symbols-sharp estornar" onclick="Estornar_pagamento(${compra.id})" data-texto="Estornar">payments</span>`}
+                                                    <span class="material-symbols-sharp editar" onclick="Editar_compra(${compra.id})" data-texto="Editar">edit_square</span>
+                                                    <span class="material-symbols-sharp deletar" onclick="Deletar_compra(${compra.id})" data-texto="Excluir">delete</span>
+                                                </a>
+                                            </div>
+                                        `
+            }
+            Esconder_obj(vazio);
+            Aparecer_obj(tabela);
+            Aparecer_obj(box_grafico);
+        }else{
+            Esconder_obj(tabela);
+            Aparecer_obj(vazio);
+            Esconder_obj(box_grafico);
         }
-        Esconder_obj(vazio);
-        Aparecer_obj(tabela);
-        Aparecer_obj(box_grafico);
     }else{
         Esconder_obj(tabela);
         Aparecer_obj(vazio);
@@ -44,6 +102,67 @@ let Listar_compras = ()=>{
     }
     legenda_grafico.value == 1 ? Pegar_valores_fornecedor() : Pegar_valores_mes()
 }
+
+for (const categoria of categorias_despesas.categorias_despesas) {
+    var opt = document.createElement('option');
+    opt.value = categoria.id;
+    opt.innerHTML = categoria.descricao;
+    document.querySelector("#multiple_select_categoria").appendChild(opt);
+
+    document.querySelector(".box_lista_categoria ul").innerHTML += `
+        <li data-id="${categoria.id}"><a>${categoria.descricao}</a></li>
+    `
+}
+
+let Selecionar_todas_opcoes = (select, valor) => {
+    !!valor ? document.querySelector('.filter_option').innerText = "Todos" : document.querySelector('.filter_option').innerText = "Selecione"
+    for (const iterator of select.options) {
+        iterator.selected = valor
+    }
+    for (const iterator of document.querySelectorAll(".box_lista_categoria ul li")) {
+        !!valor ? iterator.classList.add("checked") : iterator.classList.remove("checked")
+    }
+}
+
+let Verificar_selecionados = (select, box_ul) =>{
+    let selecteds = [...select.options].filter(option => option.selected).map(option => option.innerText)
+    if(select.options.length === selecteds.length){
+        Selecionar_todas_opcoes(document.querySelector("#multiple_select_categoria"),true)
+    }else{
+        selecteds.length > 0 ? box_ul.innerText = "" : box_ul.innerText = "Selecione"
+        for (let index = 0; index < selecteds.length; index++) {
+            index > 0 ? box_ul.innerText += `, ${selecteds[index]}` : box_ul.innerText += `${selecteds[index]}`
+        }
+    }
+}
+
+for (const iterator of document.querySelectorAll(".box_lista_categoria ul li")) {
+    iterator.addEventListener('click',(e)=>{
+        let valor_id = e.target.localName == 'li' ? e.target.dataset.id : e.target.parentElement.dataset.id
+        
+        if(!!valor_id){
+            if(iterator.classList.contains("checked")) document.querySelector(".box_lista_categoria ul li").classList.remove('checked')
+            iterator.classList.toggle("checked")
+            document.querySelector("#multiple_select_categoria").options[valor_id].selected = iterator.classList.contains("checked"); 
+            
+            Verificar_selecionados(document.querySelector("#multiple_select_categoria"),document.querySelector('.filter_option'))
+        }else{
+            Selecionar_todas_opcoes(document.querySelector("#multiple_select_categoria"),!iterator.classList.contains("checked"))
+        }
+    })
+}
+
+document.querySelector('.btn_dropdown').addEventListener('click',()=>{
+    document.querySelector('.box_lista_categoria').classList.toggle('hidden')
+})
+
+document.querySelector('.show_filtros').addEventListener('click',()=>{
+    document.querySelector('.show_filtros .icon_arrow').classList.toggle('collapsed')
+    document.querySelector('.box_filtros').classList.toggle('ativo')
+})
+
+document.querySelector('.box_search input').addEventListener('keypress',(e)=>{if (e.keyCode === 13 || e.which === 13) {Listar_compras()}})
+document.querySelector('.box_search span.search').addEventListener('click',()=>{Listar_compras()})
 
 let preencher_box_compra = (id) =>{
     let conta = contas_pagar.find(conta => id == conta.id)
@@ -57,6 +176,57 @@ let preencher_box_compra = (id) =>{
     box_compra.querySelector('#valor_total').value = conta.valor_total;
     box_compra.querySelector('#obs_pagamento').value = conta.obs;
     Esconder_obj(box_compra.querySelector('.box_ocorrencia'))
+}
+
+let Estornar_pagamento = id =>{
+    if(!!id){
+        showMessageBox().showMessage({
+            type: 'warning',
+            title: 'Estornar pagamento',
+            text: `Realmente deseja <strong>estornar pagamento</strong> desta conta?`,
+            accept:{
+                function : ()=>{
+                    let new_compras = contas_pagar.map(compra=>{
+                        if(id == compra.id){
+                            return {
+                                id: compra.id,
+                                fornecedor: compra.fornecedor,
+                                id_fornecedor: compra.id_fornecedor,
+                                categoria: compra.categoria,
+                                id_categoria : compra.id_categoria,
+                                situacao_pagamento: false,
+                                valor_total : compra.valor_total,
+                                data_emissao: compra.data_emissao,
+                                data_vencimento: compra.data_vencimento,
+                                numero_documento: compra.numero_documento,
+                                obs: compra.obs,
+                                ocorrencia: compra.ocorrencia,
+                                qtd_parcelas: compra.qtd_parcelas,
+                                n_parcela: compra.n_parcela,
+                                valor_baixa: '',
+                                data_pagamento: '',
+                                valor_juros : '',
+                                valor_desconto: '',
+                                valor_taxa: ''
+                            }
+                        }else{
+                            return compra
+                        }
+                    })
+                    localStorage.setItem('Contas_pagar',JSON.stringify(new_compras))
+                    corpo_tabela.innerHTML = '';
+                    Listar_compras();
+                },
+                text: 'Estornar'
+            }
+        })
+    }else{
+        showMessageBox().showMessage({
+            type: 'danger',
+            title: 'Erro',
+            text: `Erro desconhecido!`
+        })
+    }
 }
 
 let Show_box_pagamento = id =>{
@@ -125,7 +295,7 @@ box_pagamento.addEventListener('submit',(event)=>{
                                 qtd_parcelas: compra.qtd_parcelas,
                                 n_parcela: compra.n_parcela,
                                 valor_baixa: box_pagamento.querySelector("#valor_baixa").value,
-                                data_pagamento: new Date(box_pagamento.querySelector("#data_pagamento")).setHours(box_pagamento.querySelector("#data_pagamento").valueAsDate.getHours() + 3),
+                                data_pagamento: new Date(box_pagamento.querySelector("#data_pagamento").valueAsDate.setHours(box_pagamento.querySelector("#data_pagamento").valueAsDate.getHours() + 3)),
                                 valor_juros : box_pagamento.querySelector("#valor_juros").value,
                                 valor_desconto: box_pagamento.querySelector("#valor_desconto").value,
                                 valor_taxa: box_pagamento.querySelector("#valor_taxa").value
@@ -153,6 +323,7 @@ box_pagamento.addEventListener('submit',(event)=>{
 
 let Editar_compra = id =>{
     if(!contas_pagar.find((item) => item.id == id).situacao_pagamento){
+        id_compra = id
         Show_box_compra({id})
     }else{
         showMessageBox().showMessage({
@@ -199,18 +370,15 @@ let Hide_box_compra = () => {
 }
 
 box_compra.querySelector('#situacao_pagamento').addEventListener('change',(e)=>{
-    !!e.target.checked 
-    ? (
-        Aparecer_obj(box_compra.querySelector('.box_pago')),
-        box_compra.querySelector('#ocorrencia').value = 0,
-        box_compra.querySelector('#data_pagamento').valueAsDate = new Date(hoje.setHours(hoje.getHours() - 3)),
+    if(!!e.target.checked){
+        Aparecer_obj(box_compra.querySelector('.box_pago'))
+        box_compra.querySelector('#ocorrencia').value = 0
+        box_compra.querySelector('#data_pagamento').valueAsDate = new Date(hoje.setHours(hoje.getHours() - 3))
         Esconder_obj(box_compra.querySelector('.box_ocorrencia'))
-        )
-        
-    : (
-        Esconder_obj(box_compra.querySelector('.box_pago')),
-        Aparecer_obj(box_compra.querySelector('.box_ocorrencia'))
-    )
+    }else{
+        Esconder_obj(box_compra.querySelector('.box_pago'))
+        if(!id_compra) Aparecer_obj(box_compra.querySelector('.box_ocorrencia'))
+    }
 })
 
 box_compra.querySelector('#ocorrencia').addEventListener('change',(e)=>{
@@ -243,12 +411,14 @@ let Alterar_valor_baixa = (input)=>{
 }
 
 show_box_compra.addEventListener('click',()=>Show_box_compra());
+
 document.querySelector('.vazio button').addEventListener('click',()=>Show_box_compra());
+
 cancel_box_compra.addEventListener('click',(e)=>{
   e.preventDefault()
   Hide_box_compra()
-  
 });
+
 close_box_compra.addEventListener('click',Hide_box_compra);
 
 let validar_dados = () =>{
@@ -277,16 +447,30 @@ box_compra.addEventListener('submit',(event)=>{
                 text: `Realmente deseja <strong>editar</strong> está compra?`,
                 accept:{
                     function : ()=>{
+                        pago = box_compra.querySelector("#situacao_pagamento").checked;
                         let new_compras = contas_pagar.map(compra=>{
                             if(id_compra == compra.id){
                                 return {
                                     id: compra.id,
-                                    fornecedor: box_compra.querySelector('#nome_fornecedor').value,
-                                    valor: parseFloat(box_compra.querySelector('#valor_total').value),
-                                    qtd_parcelas: parseInt(box_compra.querySelector('#qtd_parcela').value),
-                                    data: box_compra.querySelector('#data_emissao').value,
-                                    obs: box_compra.querySelector('#obs_pagamento').value,
-                                    parcelas_restantes: parseInt(box_compra.querySelector('#qtd_parcela').value)
+                                    fornecedor: box_compra.querySelector("#nome_fornecedor").value,
+                                    id_fornecedor: box_compra.querySelector("#id_fornecedor").value,
+                                    categoria: box_compra.querySelector("#categoria").value,
+                                    id_categoria : document.querySelector("#id_categoria").value,
+                                    situacao_pagamento: pago,
+                                    valor_total : box_compra.querySelector("#valor_total").value,
+                                    data_emissao: new Date(box_compra.querySelector("#data_emissao").valueAsDate.setHours(box_compra.querySelector("#data_emissao").valueAsDate.getHours() + 3)),
+                                    data_vencimento: new Date(box_compra.querySelector("#data_vencimento").valueAsDate.setHours(box_compra.querySelector("#data_vencimento").valueAsDate.getHours() + 3)),
+                                    numero_documento: box_compra.querySelector("#n_documento").value,
+                                    obs: box_compra.querySelector("#obs_pagamento").value,
+                                    ocorrencia: compra.ocorrencia,
+                                    qtd_parcelas: compra.qtd_parcelas,
+                                    n_parcela: compra.n_parcela,
+                                    valor_baixa:
+                                    !!pago ? box_compra.querySelector("#valor_baixa").value : '',
+                                    data_pagamento: !!pago ? new Date(box_compra.querySelector("#data_pagamento").valueAsDate.setHours(box_compra.querySelector("#data_pagamento").valueAsDate.getHours() + 3)) : "",
+                                    valor_juros : !!pago ? box_compra.querySelector("#valor_juros").value : "",
+                                    valor_desconto: !!pago ? box_compra.querySelector("#valor_desconto").value : "",
+                                    valor_taxa: !!pago ? box_compra.querySelector("#valor_taxa").value : ""
                                 }
                             }else{
                                 return compra
@@ -333,7 +517,7 @@ box_compra.addEventListener('submit',(event)=>{
                                 qtd_parcelas: box_compra.querySelector("#qtd_parcela").value,
                                 n_parcela: ++i,
                                 valor_baixa: !!pago ? box_compra.querySelector("#valor_baixa").value : '',
-                                data_pagamento: !!pago ? new Date(box_compra.querySelector("#data_pagamento")).setHours(box_compra.querySelector("#data_pagamento").valueAsDate.getHours() + 3) : "",
+                                data_pagamento: !!pago ? new Date(box_compra.querySelector("#data_pagamento").valueAsDate.setHours(box_compra.querySelector("#data_pagamento").valueAsDate.getHours() + 3)) : "",
                                 valor_juros : !!pago ? box_compra.querySelector("#valor_juros").value : "",
                                 valor_desconto: !!pago ? box_compra.querySelector("#valor_desconto").value : "",
                                 valor_taxa: !!pago ? box_compra.querySelector("#valor_taxa").value : "",
@@ -358,7 +542,7 @@ box_compra.addEventListener('submit',(event)=>{
                                 n_parcela: 0,
                                 valor_baixa:
                                 !!pago ? box_compra.querySelector("#valor_baixa").value : '',
-                                data_pagamento: !!pago ? new Date(box_compra.querySelector("#data_pagamento")).setHours(box_compra.querySelector("#data_pagamento").valueAsDate.getHours() + 3) : "",
+                                data_pagamento: !!pago ? new Date(box_compra.querySelector("#data_pagamento").valueAsDate.setHours(box_compra.querySelector("#data_pagamento").valueAsDate.getHours() + 3)) : "",
                                 valor_juros : !!pago ? box_compra.querySelector("#valor_juros").value : "",
                                 valor_desconto: !!pago ? box_compra.querySelector("#valor_desconto").value : "",
                                 valor_taxa: !!pago ? box_compra.querySelector("#valor_taxa").value : ""
@@ -508,7 +692,7 @@ let GerarGrafico = (local, labels, label, values, type) =>{
                 fill: false,
                 tension: 0.1,
                 backgroundColor: [
-                  '#d42940'
+                  '#1c434f'
                 ]
               }]
         }
@@ -640,7 +824,7 @@ box_compra.querySelector('#categoria').addEventListener('keyup',(e)=>{
         },{count : 0})
         for (const categoria of categorias) {
             Aparecer_obj(document.querySelector('.box_compra ul.categorias'))
-            document.querySelector('.box_compra ul.categorias').innerHTML += `<li onclick="Selecionar_categoria(${categoria.id},'${categoria.descricao}')">${categoria.descricao}</li>`
+            document.querySelector('.box_compra ul.categorias').innerHTML += `<li onclick="Selecionar_categoria(${categoria.id},'${categoria.descricao}')" tabindex="-1" role="menuitem">${categoria.descricao}</li>`
         }
         
     }else{
@@ -655,6 +839,11 @@ window.addEventListener('mouseup', function(e) {
     }
     if(e.target == document.querySelector('.back_box_pagamento') && !document.querySelector('.back_box_pagamento').classList.value.includes('hidden')){
         Esconder_obj(document.querySelector('.back_box_pagamento'))
+    }
+    if (!(document.querySelector('.box_lista_categoria').contains(e.target)) 
+        && !document.querySelector('.box_lista_categoria').classList.value.includes('hidden') 
+        && !document.querySelector('.btn_dropdown').contains(e.target)){
+            Esconder_obj(document.querySelector('.box_lista_categoria'))
     }
 });
 

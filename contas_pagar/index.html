@@ -35,6 +35,82 @@
         <h1 class="titulo">Contas a pagar</h1>
         <div class="box_btn">
             <button class="show_box_compra">Adicionar</button>
+            <div>
+                <div class="box_input box_search">
+                  <input type="search" placeholder="Pesquisar">
+                  <span class="material-symbols-sharp search">search</span>
+                </div>
+              <span class="show_filtros">Filtros<span class="material-symbols-sharp icon_arrow">arrow_drop_down</span></span>
+            </div>
+            <div class="box_filtros">
+                <div>
+                    <div class="box_input">
+                        <label for="situacao">Situação</label>
+                        <select name="situacao" id="situacao">
+                            <option value="">Todos</option>
+                            <option value="false">A pagar</option>
+                            <option value="true">Pago</option>
+                        </select>
+                    </div>
+                    <div class="box_input" style="width: 16rem;">
+                        <label>Categoria</label>
+                        <div class="btn_dropdown">
+                            <span class="filter_option">Selecione</span>
+                            <span class="material-symbols-sharp icon_arrow">arrow_drop_down</span>
+                        </div>
+                        <div class="box_lista_categoria hidden">
+                            <ul>
+                                <li><a data-id="null">Todos</a></li>
+                            </ul>
+                        </div>
+                        <select id="multiple_select_categoria" multiple class="hidden"></select>
+                    </div>
+                    <div class="grupo_box_input">
+                        <label for="">Data de emissão</label>
+                        <div class="box_input">
+                            <label for="emissao_inicio">De</label>
+                            <input type="date" id="emissao_inicio" style="width: 10rem;" name="emissao_inicio">
+                        </div>
+                        <div class="box_input">
+                            <label for="emissao_fim">Até</label>
+                            <input type="date" id="emissao_fim" style="width: 10rem;" name="emissao_fim">
+                        </div>
+                    </div>
+                    <div class="grupo_box_input">
+                        <label for="">Data de vencimento</label>
+                        <div class="box_input">
+                            <label for="vencimento_inicio">De</label>
+                            <input type="date" id="vencimento_inicio" style="width: 10rem;" name="vencimento_inicio">
+                        </div>
+                        <div class="box_input">
+                            <label for="vencimento_fim">Até</label>
+                            <input type="date" id="vencimento_fim" style="width: 10rem;" name="vencimento_fim">
+                        </div>
+                    </div>
+                    <div class="grupo_box_input">
+                        <label for="">Data de pagamento</label>
+                        <div class="box_input">
+                            <label for="pagamento_inicio">De</label>
+                            <input type="date" id="pagamento_inicio" style="width: 10rem;" name="pagamento_inicio">
+                        </div>
+                        <div class="box_input">
+                            <label for="pagamento_fim">Até</label>
+                            <input type="date" id="pagamento_fim" style="width: 10rem;" name="pagamento_fim">
+                        </div>
+                    </div>
+                    <div class="grupo_box_input">
+                        <label for="">Valor total</label>
+                        <div class="box_input">
+                            <label for="valor_inicio">De</label>
+                            <input type="number" id="valor_inicio" style="width: 10rem;" name="valor_inicio">
+                        </div>
+                        <div class="box_input">
+                            <label for="valor_fim">Até</label>
+                            <input type="number" id="valor_fim" style="width: 10rem;" name="valor_fim">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="vazio hidden">
             <h1>Nenhum pagamento encontrado</h1>
@@ -42,12 +118,12 @@
         </div>
         <div class="table hidden">
             <div class="head_table">
-                <a>DATA</a>
-                <a>FORNECEDOR</a>
-                <a>CATEGORIA</a>
-                <a>PARCELA</a>
-                <a>VALOR PARCELA</a>
-                <a>AÇÕES</a>
+                <a>Vencimento</a>
+                <a>Fornecedor</a>
+                <a>Categoria</a>
+                <a>Parcela</a>
+                <a>Valor</a>
+                <a>Ações</a>
             </div>
             <div class="body_table"></div>
         </div>
